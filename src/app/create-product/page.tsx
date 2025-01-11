@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import ProductHeader from './components/ProductHeader';
 import Image from 'next/image';
 import InputField from '../getstarted/components/InputField';
@@ -100,13 +100,13 @@ const Page: React.FC = () => {
           <InputField
             type='number'
             placeholder='Price'
-            value={price !== '' ? String(price) : ''} // Convert to string
+            value={price !== '' ? String(price) : ''}
             onChange={(e) => setPrice(e.target.value ? Number(e.target.value) : '')}
           />
           <InputField
             type='number'
             placeholder='Old Price'
-            value={oldPrice !== '' ? String(oldPrice) : ''} // Convert to string
+            value={oldPrice !== '' ? String(oldPrice) : ''}
             onChange={(e) => setOldPrice(e.target.value ? Number(e.target.value) : '')}
           />
         </div>
@@ -120,8 +120,7 @@ const Page: React.FC = () => {
       </div>
 
       {/* Product images */}
-      ```tsx
-      <div className='flex items-center justify-between px-4 py-3 border-t'>
+      <div className='flex items-center justify between px-4 py-3 border-t'>
         <h1 className='text-sm font-medium'>Product images</h1>
         <Image src={'/chevron_down.svg'} alt='Arrow down' width={20} height={20} />
       </div>
