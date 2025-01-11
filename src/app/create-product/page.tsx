@@ -192,7 +192,7 @@ const Page: React.FC = () => {
       </div>
 
       <div className='grid grid-cols-2 gap-4 px-4 border py-4'>
-        <Button label='Cancel' className='bg-transparent text-[#8A226F] border border-[#8A226F]' onClick={handleCancel} />
+        <Button label='Cancel' className='bg-transparent text-[#8A226F] hover:text-[#8A226F] font-bold border border-[#8A226F]' onClick={handleCancel} />
         <Button label='Save' onClick={handleSave} />
       </div>
     </div>
