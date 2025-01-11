@@ -38,38 +38,42 @@ const Page: React.FC = () => {
     }
   };
 
-  const handleSave = async () => {
-    // Prepare the data to be sent to the API
-    const formData = {
-      productTitle,
-      description,
-      price,
-      oldPrice,
-      inventoryStocks,
-      selectedFiles: selectedFiles.map(file => file.name), // Just sending file names for simplicity
-    };
+  // const handleSave = async () => {
+  //   // Prepare the data to be sent to the API
+  //   const formData = {
+  //     productTitle,
+  //     description,
+  //     price,
+  //     oldPrice,
+  //     inventoryStocks,
+  //     selectedFiles: selectedFiles.map(file => file.name), // Just sending file names for simplicity
+  //   };
 
-    try {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts', { // Dummy API endpoint
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+  //   try {
+  //     const response = await fetch('https://jsonplaceholder.typicode.com/posts', { // Dummy API endpoint
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify(formData),
+  //     });
 
-      if (response.ok) {
-        // Handle successful submission
-        console.log('Data submitted successfully:', await response.json());
-        router.push('/'); // Navigate to the next page
-      } else {
-        console.error('Failed to submit data:', response.statusText);
-      }
-    } catch (error) {
-      console.error('Error submitting data:', error);
-    }
-  };
+  //     if (response.ok) {
+  //       // Handle successful submission
+  //       console.log('Data submitted successfully:', await response.json());
+  //       router.push('/'); // Navigate to the next page
+  //     } else {
+  //       console.error('Failed to submit data:', response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error('Error submitting data:', error);
+  //   }
+  // };
 
+  const handleSave = () => {
+    router.push('/')
+  }
+  
   const handleCancel = () => {
     router.back();
   };
