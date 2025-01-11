@@ -37,7 +37,7 @@ export default function Home() {
     <div className="flex h-[100dvh] items-center justify-between flex-col py-10 px-4 md:px-8">
   <div className="flex items-center justify-center flex-col bg-white">
 
-    <Image className="w-80 h-80 sm:w-60 sm:h-60" src={'/ShoppingSale.svg'} width={500} height={500} alt="Welcome Image" loader={() => '/shoppingSale1.svg'} />
+    <Image className="w-80 h-80 sm:w-60 sm:h-60" src={'/ShoppingSale.svg'} width={500} height={500} alt="Welcome Image" loader={() => '/ShoppingSale.svg'} />
 
 
     <div className="text-center py-6 px-4 text-[#000000E5]">
