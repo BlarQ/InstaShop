@@ -172,7 +172,7 @@ const Page: React.FC = () => {
       <div className='text-sm p-4 space-y-4 border'>
         <p className='font-medium'>Inventory variations</p>
         <div className='flex items-center justify-center gap-2 px-4 text-[#00000099]'>
-          <input type='checkbox' id='variant1' name='variant' style={{ accentColor: '#8A226F' }} />
+          <input type='checkbox' id='variant1' name='variant' className="accent-[#8A226F]" />
           <label htmlFor='variant1'>This product is variable; has different colors, sizes, weight, materials, etc.</label>
         </div>
       </div>
@@ -186,11 +186,11 @@ const Page: React.FC = () => {
         <div className='text-xs py-4 space-y-4 px-1'>
           <div className='flex items-center justify-between'>
             <label htmlFor='self_shipping'>Self shipping</label>
-            <input type="checkbox" name="self_shipping" title='Self shipping' id="self_shipping" style={{ accentColor: '#8A226F' }} />
+            <input type="checkbox" name="self_shipping" title='Self shipping' id="self_shipping" className="accent-[#8A226F]" />
           </div>
           <div className='flex items-center justify-between'>
             <label htmlFor='InstaShop_shipping'>InstaShop shipping</label>
-            <input type="checkbox" name="InstaShop_shipping" title='InstaShop shipping' id="InstaShop_shipping" style={{ accentColor: '#8A226F' }} />
+            <input type="checkbox" name="InstaShop_shipping" title='InstaShop shipping' id="InstaShop_shipping" className="accent-[#8A226F]" />
           </div>
           <InputField placeholder='Inventory stocks' className='text-sm' />
         </div>
