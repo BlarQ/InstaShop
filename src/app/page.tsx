@@ -42,7 +42,7 @@ export default function Home() {
 
     <div className="text-center py-6 px-4 text-[#000000E5]">
       <h1 className="text-3xl sm:text-4xl font-bold">Welcome</h1>
-      <p className="text-[12px] sm:text-[14px] font-normal">The safest platfrom to shop from social media vendors</p>
+      <p className="text-[12px] px-8 sm:text-[14px] font-normal">The safest platfrom to shop from social media vendors</p>
     </div>
 
     <div className="bg-[#FFEAFA] p-4 border border-[#8A226F] w-full rounded-xl">
@@ -57,7 +57,7 @@ export default function Home() {
     </div>
   </div>
   
-  <Button onClick={handleClick} className="md:mt-10"/>
+  <Button onClick={handleClick} className="md:mt-10 mt-8"/>
 </div>
   );
 }
