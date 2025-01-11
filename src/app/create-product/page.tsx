@@ -24,7 +24,6 @@ const Page: React.FC = () => {
   const [oldPrice, setOldPrice] = useState<number | ''>('');
   const [inventoryStocks, setInventoryStocks] = useState<string>('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [imagePreviews, setImagePreviews] = useState<string[]>([]); // State for image previews
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -34,20 +33,10 @@ const Page: React.FC = () => {
     const files = e.target.files;
     if (files) {
       const fileArray = Array.from(files);
-      setSelectedFiles(prevFiles => [...prevFiles, ...fileArray]); // Combine existing and new files
+      setSelectedFiles(fileArray);
+      console.log('Selected files:', fileArray);
     }
   };
-
-  // Create object URLs for selected files
-  useEffect(() => {
-    const previews = selectedFiles.map(file => URL.createObjectURL(file));
-    setImagePreviews(previews);
-
-    // Cleanup function to revoke object URLs
-    return () => {
-      previews.forEach(preview => URL.revokeObjectURL(preview));
-    };
-  }, [selectedFiles]);
 
   const handleSave = async () => {
     const formData = {
@@ -56,7 +45,7 @@ const Page: React.FC = () => {
       price,
       oldPrice,
       inventoryStocks,
-      selectedFiles: selectedFiles.map(file => file.name), // Just sending file names for simplicity
+      selectedFiles: selectedFiles.map(file => file.name),
     };
 
     try {
@@ -111,13 +100,13 @@ const Page: React.FC = () => {
           <InputField
             type='number'
             placeholder='Price'
-            value={price}
-            onChange={(e) => setPrice(e.target.value ? Number (e.target.value) : '')}
+            value={price !== '' ? String(price) : ''} // Convert to string
+            onChange={(e) => setPrice(e.target.value ? Number(e.target.value) : '')}
           />
           <InputField
             type='number'
             placeholder='Old Price'
-            value={oldPrice}
+            value={oldPrice !== '' ? String(oldPrice) : ''} // Convert to string
             onChange={(e) => setOldPrice(e.target.value ? Number(e.target.value) : '')}
           />
         </div>
@@ -131,6 +120,7 @@ const Page: React.FC = () => {
       </div>
 
       {/* Product images */}
+      ```tsx
       <div className='flex items-center justify-between px-4 py-3 border-t'>
         <h1 className='text-sm font-medium'>Product images</h1>
         <Image src={'/chevron_down.svg'} alt='Arrow down' width={20} height={20} />
@@ -138,17 +128,17 @@ const Page: React.FC = () => {
 
       <div className='pb-5'>
         <div className='flex flex-wrap gap-2 my-2 px-4'>
-          {imagePreviews.map((preview, index) => (
+          {selectedFiles.map((file, index) => (
             <div key={index} className='flex items-center justify-between w-full gap-2'>
               <div className='flex items-center justify-center gap-2'>
                 <Image
-                  src={preview}
+                  src={URL.createObjectURL(file)}
                   alt={`Uploaded image ${index + 1}`}
                   width={80}
                   height={80}
                   className='rounded-md object-contain h-20 w-20'
                 />
-                <p className='text-xs'>{selectedFiles[index]?.name}</p>
+                <p className='text-xs'>{file.name}</p>
               </div>
               <div>
                 <Image src={'/Frame.svg'} alt='Switch' width={32.5} height={20} />
