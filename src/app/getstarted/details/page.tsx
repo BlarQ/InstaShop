@@ -39,7 +39,7 @@ const Page: React.FC = () => {
     // Simulate a successful submission
     setUploadStatus('Store information submitted successfully!');
 
-    router.push('/');
+    router.push('/create-product');
   };
 
   return (
