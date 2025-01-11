@@ -24,6 +24,7 @@ const Page: React.FC = () => {
   const [oldPrice, setOldPrice] = useState<number | ''>('');
   const [inventoryStocks, setInventoryStocks] = useState<string>('');
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]); // State for image previews
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -33,10 +34,20 @@ const Page: React.FC = () => {
     const files = e.target.files;
     if (files) {
       const fileArray = Array.from(files);
-      setSelectedFiles(fileArray);
-      console.log('Selected files:', fileArray);
+      setSelectedFiles(prevFiles => [...prevFiles, ...fileArray]); // Combine existing and new files
     }
   };
+
+  // Create object URLs for selected files
+  useEffect(() => {
+    const previews = selectedFiles.map(file => URL.createObjectURL(file));
+    setImagePreviews(previews);
+
+    // Cleanup function to revoke object URLs
+    return () => {
+      previews.forEach(preview => URL.revokeObjectURL(preview));
+    };
+  }, [selectedFiles]);
 
   const handleSave = async () => {
     const formData = {
@@ -45,7 +56,7 @@ const Page: React.FC = () => {
       price,
       oldPrice,
       inventoryStocks,
-      selectedFiles: selectedFiles.map(file => file.name),
+      selectedFiles: selectedFiles.map(file => file.name), // Just sending file names for simplicity
     };
 
     try {
@@ -86,7 +97,7 @@ const Page: React.FC = () => {
           type='text'
           placeholder='Product Title'
           value={productTitle}
-          onChange={(e ) => setProductTitle(e.target.value)}
+          onChange={(e) => setProductTitle(e.target.value)}
         />
         <textarea
           className='border border-[#00000033] h-20 rounded-xl w-full px-4 py-2'
@@ -101,7 +112,7 @@ const Page: React.FC = () => {
             type='number'
             placeholder='Price'
             value={price}
-            onChange={(e) => setPrice(e.target.value ? Number(e.target.value) : '')}
+            onChange={(e) => setPrice(e.target.value ? Number (e.target.value) : '')}
           />
           <InputField
             type='number'
@@ -127,17 +138,17 @@ const Page: React.FC = () => {
 
       <div className='pb-5'>
         <div className='flex flex-wrap gap-2 my-2 px-4'>
-          {selectedFiles.map((file, index) => (
+          {imagePreviews.map((preview, index) => (
             <div key={index} className='flex items-center justify-between w-full gap-2'>
               <div className='flex items-center justify-center gap-2'>
                 <Image
-                  src={URL.createObjectURL(file)}
+                  src={preview}
                   alt={`Uploaded image ${index + 1}`}
                   width={80}
                   height={80}
                   className='rounded-md object-contain h-20 w-20'
                 />
-                <p className='text-xs'>{file.name}</p>
+                <p className='text-xs'>{selectedFiles[index]?.name}</p>
               </div>
               <div>
                 <Image src={'/Frame.svg'} alt='Switch' width={32.5} height={20} />
@@ -188,7 +199,8 @@ const Page: React.FC = () => {
             <input type="checkbox" name="InstaShop_shipping" title='InstaShop shipping' id="InstaShop_shipping" className="accent-[#8A226F]" />
           </div>
           <InputField placeholder='Inventory stocks' className='text-sm' />
-        </div> </div>
+        </div>
+      </div>
 
       <div className='grid grid-cols-2 gap-4 px-4 border py-4'>
         <Button label='Cancel' className='bg-transparent text-[#8A226F] border border-[#8A226F]' onClick={handleCancel} />
