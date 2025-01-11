@@ -17,63 +17,57 @@ const suggestions = [
 
 const Page: React.FC = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const router = useRouter(); // Initialize the router
+  const router = useRouter();
   const [productTitle, setProductTitle] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [price, setPrice] = useState<number | ''>('');
   const [oldPrice, setOldPrice] = useState<number | ''>('');
   const [inventoryStocks, setInventoryStocks] = useState<string>('');
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]); // State to hold selected files
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
   const handleClick = () => {
-    inputRef.current?.click(); // Trigger the click event of the hidden input
+    inputRef.current?.click();
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
       const fileArray = Array.from(files);
-      setSelectedFiles(fileArray); // Update state with selected files
+      setSelectedFiles(fileArray);
       console.log('Selected files:', fileArray);
     }
   };
 
-  // const handleSave = async () => {
-  //   // Prepare the data to be sent to the API
-  //   const formData = {
-  //     productTitle,
-  //     description,
-  //     price,
-  //     oldPrice,
-  //     inventoryStocks,
-  //     selectedFiles: selectedFiles.map(file => file.name), // Just sending file names for simplicity
-  //   };
+  const handleSave = async () => {
+    const formData = {
+      productTitle,
+      description,
+      price,
+      oldPrice,
+      inventoryStocks,
+      selectedFiles: selectedFiles.map(file => file.name),
+    };
 
-  //   try {
-  //     const response = await fetch('https://jsonplaceholder.typicode.com/posts', { // Dummy API endpoint
-  //       method: 'POST',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //       },
-  //       body: JSON.stringify(formData),
-  //     });
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
 
-  //     if (response.ok) {
-  //       // Handle successful submission
-  //       console.log('Data submitted successfully:', await response.json());
-  //       router.push('/'); // Navigate to the next page
-  //     } else {
-  //       console.error('Failed to submit data:', response.statusText);
-  //     }
-  //   } catch (error) {
-  //     console.error('Error submitting data:', error);
-  //   }
-  // };
+      if (response.ok) {
+        console.log('Data submitted successfully:', await response.json());
+        router.push('/'); // Navigate to the next page
+      } else {
+        console.error('Failed to submit data:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
+  };
 
-  const handleSave = () => {
-    router.push('/')
-  }
-  
   const handleCancel = () => {
     router.back();
   };
@@ -92,7 +86,7 @@ const Page: React.FC = () => {
           type='text'
           placeholder='Product Title'
           value={productTitle}
-          onChange={(e) => setProductTitle(e.target.value)}
+          onChange={(e ) => setProductTitle(e.target.value)}
         />
         <textarea
           className='border border-[#00000033] h-20 rounded-xl w-full px-4 py-2'
@@ -113,7 +107,7 @@ const Page: React.FC = () => {
             type='number'
             placeholder='Old Price'
             value={oldPrice}
-            on Change={(e) => setOldPrice(e.target.value ? Number(e.target.value) : '')}
+            onChange={(e) => setOldPrice(e.target.value ? Number(e.target.value) : '')}
           />
         </div>
         <AutocompleteTextarea suggestions={suggestions} />
@@ -132,14 +126,12 @@ const Page: React.FC = () => {
       </div>
 
       <div className='pb-5'>
-        {/* Optional: Display selected image previews */}
         <div className='flex flex-wrap gap-2 my-2 px-4'>
           {selectedFiles.map((file, index) => (
             <div key={index} className='flex items-center justify-between w-full gap-2'>
               <div className='flex items-center justify-center gap-2'>
-
                 <Image
-                  src={URL.createObjectURL(file)} // Create a URL for the file
+                  src={URL.createObjectURL(file)}
                   alt={`Uploaded image ${index + 1}`}
                   width={80}
                   height={80}
@@ -147,7 +139,6 @@ const Page: React.FC = () => {
                 />
                 <p className='text-xs'>{file.name}</p>
               </div>
-
               <div>
                 <Image src={'/Frame.svg'} alt='Switch' width={32.5} height={20} />
               </div>
@@ -157,7 +148,7 @@ const Page: React.FC = () => {
 
         <div
           className='flex items-center text-[#8A226F] text-sm font-medium justify-center gap-2 py-3 bg-[#00000008] rounded-full mx-4 cursor-pointer'
-          onClick={handleClick} // Trigger the input click
+          onClick={handleClick}
         >
           <p>Add Images</p>
           <Image src={'/Icon.svg'} height={20} width={20} alt='Product Images' />
@@ -197,8 +188,7 @@ const Page: React.FC = () => {
             <input type="checkbox" name="InstaShop_shipping" title='InstaShop shipping' id="InstaShop_shipping" className="accent-[#8A226F]" />
           </div>
           <InputField placeholder='Inventory stocks' className='text-sm' />
-        </div>
-      </div>
+        </div> </div>
 
       <div className='grid grid-cols-2 gap-4 px-4 border py-4'>
         <Button label='Cancel' className='bg-transparent text-[#8A226F] border border-[#8A226F]' onClick={handleCancel} />
