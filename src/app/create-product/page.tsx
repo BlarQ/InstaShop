@@ -120,7 +120,7 @@ const Page: React.FC = () => {
       </div>
 
       {/* Product images */}
-      <div className='flex items-center justify between px-4 py-3 border-t'>
+      <div className='flex items-center justify-between px-4 py-3 border-t'>
         <h1 className='text-sm font-medium'>Product images</h1>
         <Image src={'/chevron_down.svg'} alt='Arrow down' width={20} height={20} />
       </div>
