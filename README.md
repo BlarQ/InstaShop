@@ -48,4 +48,4 @@ Contributions are welcome! Please open an issue or submit a pull request for any
 
 ## Contact
 
-For any inquiries, please reach out to [Mail](collinsogunlala@gmail.com).
+For any inquiries, please reach out to [collinsogunlala@gmail.com].
