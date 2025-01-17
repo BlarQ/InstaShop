@@ -8,8 +8,8 @@ import { useRouter } from 'next/navigation'
 
 const socials = [
   { id: 1, name: 'Instagram', icon: '/Instagram.svg' },
-  { id: 1, name: 'TikTok', icon: '/TikTok.svg' },
-  { id: 1, name: 'Google', icon: '/Google.svg' },
+  { id: 2, name: 'TikTok', icon: '/TikTok.svg' },
+  { id: 3, name: 'Google', icon: '/Google.svg' },
 ]
 
 const Page = () => {

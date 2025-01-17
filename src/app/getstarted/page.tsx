@@ -6,7 +6,6 @@ import Button from '../components/Button'
 import { useRouter } from 'next/navigation'
 
 const Page = () => {
-  // Add your page logic here
   const [emailPhone, setEmailPhone] = useState<string>('')
 
   const router = useRouter()
